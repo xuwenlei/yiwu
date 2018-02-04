@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" 
+"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<properties resource="mybatisgenerator.properties" />
+	<classPathEntry location="${mbg.classPath}" />
+	<context id="mhub" targetRuntime="Mybatis3">
+	<property name="javaFileEncoding" value="UTF-8"/>
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" /><!-- 是否取消注释 -->
+			<property name="suppressDate" value="false" /> <!-- 是否生成注释代时间戳 -->
+			<property name="addRemarkComments" value="true" />
+		</commentGenerator>
+		<!-- jdbc连接 -->
+		<jdbcConnection driverClass="${mbg.jdbc_driver}"
+			connectionURL="${mbg.jdbc_url}" userId="${mbg.jdbc_user}" password="${mbg.jdbc_password}" />
+
+		<!-- 类型转换 -->
+		<javaTypeResolver>
+			<!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 生成实体类地址 -->
+		<javaModelGenerator  targetPackage="top.dream.yiwu.domain"
+			targetProject="${mbg.project.entry}">
+			<!-- 是否在当前路径下新加一层schema,eg：fase路径com.woyi.wdp.demo， true:com.woyi.wdp.demo.[schemaName] -->
+			<property name="enableSubPackages" value="false" />
+			<!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+			<property name="trimStrings" value="false" />
+		</javaModelGenerator>
+
+		<!-- 生成mapxml文件 -->
+		<sqlMapGenerator  targetPackage="top.dream.yiwu.mapper"
+			targetProject="${mbg.project.service}">
+			<!-- 是否在当前路径下新加一层schema -->
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+
+		<!-- 生成mapxml对应client，也就是接口dao --> 
+		<javaClientGenerator  targetPackage="top.dream.yiwu.dao" 
+			targetProject="${mbg.project.service}" type="XMLMAPPER">
+			<!-- 是否在当前路径下新加一层schema -->
+			<property name="enableSubPackages" value="false" />
+			<!-- <property name="rootInterface" value="top.dream.yiwu.MybatisMapper"/> -->
+		</javaClientGenerator>
+		
+		<table tableName="t_product" domainObjectName="Product"
+		    enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false">
+			<generatedKey column="errorid" sqlStatement="${mbg.keySqlStatement}"/>
+		</table>
+		
+		 
+	</context>
+</generatorConfiguration>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.dream.yiwu.dao.ProductMapper">
+  <resultMap id="BaseResultMap" type="top.dream.yiwu.domain.Product">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="productname" jdbcType="VARCHAR" property="productname" />
+    <result column="originalprice" jdbcType="DOUBLE" property="originalprice" />
+    <result column="currentprice" jdbcType="DOUBLE" property="currentprice" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="ishot" jdbcType="INTEGER" property="ishot" />
+    <result column="categoryid" jdbcType="VARCHAR" property="categoryid" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="top.dream.yiwu.domain.Product">
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, productname, originalprice, currentprice, image, ishot, categoryid, userid, createtime, 
+    updatetime, status
+  </sql>
+  <sql id="Blob_Column_List">
+    description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_product
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_product
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="top.dream.yiwu.domain.Product">
+    insert into t_product (id, productname, originalprice, 
+      currentprice, image, ishot, 
+      categoryid, userid, createtime, 
+      updatetime, status, description
+      )
+    values (#{id,jdbcType=VARCHAR}, #{productname,jdbcType=VARCHAR}, #{originalprice,jdbcType=DOUBLE}, 
+      #{currentprice,jdbcType=DOUBLE}, #{image,jdbcType=VARCHAR}, #{ishot,jdbcType=INTEGER}, 
+      #{categoryid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{description,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="top.dream.yiwu.domain.Product">
+    insert into t_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="productname != null">
+        productname,
+      </if>
+      <if test="originalprice != null">
+        originalprice,
+      </if>
+      <if test="currentprice != null">
+        currentprice,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="ishot != null">
+        ishot,
+      </if>
+      <if test="categoryid != null">
+        categoryid,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null">
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="originalprice != null">
+        #{originalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="currentprice != null">
+        #{currentprice,jdbcType=DOUBLE},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="ishot != null">
+        #{ishot,jdbcType=INTEGER},
+      </if>
+      <if test="categoryid != null">
+        #{categoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="top.dream.yiwu.domain.Product">
+    update t_product
+    <set>
+      <if test="productname != null">
+        productname = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="originalprice != null">
+        originalprice = #{originalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="currentprice != null">
+        currentprice = #{currentprice,jdbcType=DOUBLE},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="ishot != null">
+        ishot = #{ishot,jdbcType=INTEGER},
+      </if>
+      <if test="categoryid != null">
+        categoryid = #{categoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="top.dream.yiwu.domain.Product">
+    update t_product
+    set productname = #{productname,jdbcType=VARCHAR},
+      originalprice = #{originalprice,jdbcType=DOUBLE},
+      currentprice = #{currentprice,jdbcType=DOUBLE},
+      image = #{image,jdbcType=VARCHAR},
+      ishot = #{ishot,jdbcType=INTEGER},
+      categoryid = #{categoryid,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.dream.yiwu.domain.Product">
+    update t_product
+    set productname = #{productname,jdbcType=VARCHAR},
+      originalprice = #{originalprice,jdbcType=DOUBLE},
+      currentprice = #{currentprice,jdbcType=DOUBLE},
+      image = #{image,jdbcType=VARCHAR},
+      ishot = #{ishot,jdbcType=INTEGER},
+      categoryid = #{categoryid,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
